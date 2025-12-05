@@ -8,10 +8,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# Crear tablas automáticamente al iniciar (solo para desarrollo)
-with app.app_context():
-    db.create_all()
-
 @app.route('/api/workshops', methods=['GET'])
 def api_get_workshops():
     workshops = Workshop.query.all()
@@ -123,6 +119,10 @@ def web_delete_workshop(id):
         db.session.commit()
     return redirect(url_for('view_admin'))
 
+# ... (todo tu código de rutas anterior) ...
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+        
     app.run(debug=True, port=5000)
