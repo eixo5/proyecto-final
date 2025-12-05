@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Talleres Disponibles</h2>
+<div class="row">
+    {% for workshop in workshops %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ workshop.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ workshop.category }}</h6>
+                <p class="card-text">{{ workshop.description }}</p>
+                <ul class="list-unstyled">
+                    <li>📅 {{ workshop.date }} | ⏰ {{ workshop.time }}</li>
+                    <li>📍 {{ workshop.location }}</li>
+                </ul>
+                <button class="btn btn-success w-100" onclick="alert('Funcionalidad vía API: POST /api/workshops/{{workshop.id}}/register')">
+                    Inscribirse
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
