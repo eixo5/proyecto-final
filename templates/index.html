@@ -1,25 +1,72 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="mb-4">Talleres Disponibles</h2>
+<div class="mb-4">
+    <div class="section-title">
+        <div class="section-title-icon">
+            <i class="bi bi-bookmark-heart-fill"></i>
+        </div>
+        <span>Talleres disponibles</span>
+    </div>
+    <p class="section-subtitle mb-0">
+        Descubre actividades, clubes de lectura y talleres especiales organizados por la biblioteca.
+    </p>
+</div>
+
 <div class="row">
-    {% for workshop in workshops %}
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">{{ workshop.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ workshop.category }}</h6>
-                <p class="card-text">{{ workshop.description }}</p>
-                <ul class="list-unstyled">
-                    <li>📅 {{ workshop.date }} | ⏰ {{ workshop.time }}</li>
-                    <li>📍 {{ workshop.location }}</li>
-                </ul>
-                <button class="btn btn-success w-100" onclick="alert('Funcionalidad vía API: POST /api/workshops/{{workshop.id}}/register')">
-                    Inscribirse
-                </button>
+    {% if workshops %}
+        {% for workshop in workshops %}
+        <div class="col-md-6 col-xl-4 mb-4">
+            <div class="card lib-workshop-card h-100 shadow-sm border-0 position-relative">
+                <div class="lib-bookmark"></div>
+                <div class="card-body position-relative">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-book me-2 text-warning"></i>{{ workshop.name }}
+                        </h5>
+                        <span class="lib-badge-category">
+                            {{ workshop.category or "General" }}
+                        </span>
+                    </div>
+
+                    {% if workshop.description %}
+                    <p class="card-text mb-3 text-muted" style="min-height: 3.5em;">
+                        {{ workshop.description }}
+                    </p>
+                    {% else %}
+                    <p class="card-text mb-3 text-muted fst-italic">
+                        Próximamente se agregará una descripción detallada.
+                    </p>
+                    {% endif %}
+
+                    <ul class="list-unstyled small mb-3">
+                        <li class="mb-1">
+                            <i class="bi bi-calendar-event me-2 text-secondary"></i>
+                            <strong>Fecha:</strong> {{ workshop.date }} · {{ workshop.time }}
+                        </li>
+                        <li>
+                            <i class="bi bi-geo-alt-fill me-2 text-secondary"></i>
+                            <strong>Lugar:</strong> {{ workshop.location }}
+                        </li>
+                    </ul>
+
+                    <button
+                        class="btn btn-success w-100 d-flex justify-content-center align-items-center gap-2"
+                        onclick="alert('Esta acción se gestionaría vía API: POST /api/workshops/{{ workshop.id }}/register');">
+                        <i class="bi bi-pencil-square"></i>
+                        <span>Inscribirme en este taller</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-warning d-flex align-items-center gap-2 mb-0">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <span>No hay talleres disponibles por el momento. Vuelve a consultar pronto.</span>
+            </div>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
