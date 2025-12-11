@@ -38,7 +38,7 @@
             background: linear-gradient(
                 90deg,
                 var(--lib-primary),
-                color-mix(in srgb, var(--lib-primary) 80%, #000 20%)
+                #202E76
             );
         }
 
@@ -81,7 +81,7 @@
             background: #ffffff;
             border-radius: 24px;
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-            border: 1px solid color-mix(in srgb, var(--lib-accent) 50%, #ffffff 50%);
+            border: 1px solid #BFABE1;
             padding: 2.5rem 2rem;
         }
 
@@ -122,7 +122,7 @@
         .lib-table-wrapper {
             border-radius: 18px;
             overflow: hidden;
-            border: 1px solid color-mix(in srgb, var(--lib-accent) 70%, #ffffff 30%);
+            border: 1px solid #A48DD6;
             background: #fff;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
@@ -181,11 +181,11 @@
         /* Cards de talleres */
         .lib-workshop-card {
             border-radius: 20px;
-            border: 1px solid color-mix(in srgb, var(--lib-accent) 60%, #ffffff 40%);
+            border: 1px solid #B29ADA;
             background: linear-gradient(
                 135deg,
                 #ffffff,
-                color-mix(in srgb, var(--lib-secondary) 15%, #ffffff 85%)
+                #FFF9E6
             );
             position: relative;
             overflow: hidden;
@@ -231,7 +231,7 @@
         /* Modal */
         .modal-content {
             border-radius: 20px;
-            border: 1px solid color-mix(in srgb, var(--lib-accent) 60%, #ffffff 40%);
+            border: 1px solid #B29ADA;
         }
 
         .modal-header {
@@ -266,7 +266,11 @@
 </a>
 
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#mainNavbar"
+                    aria-label="Abrir menú de navegación">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -302,8 +306,34 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Script para registro de talleres -->
+<script>
+function registerToWorkshop(workshopId) {
+    const studentName = prompt("Ingresa tu nombre para registrarte:");
+
+    if (!studentName) {
+        alert("Registro cancelado.");
+        return;
+    }
+
+    fetch(`/api/workshops/${workshopId}/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ student_name: studentName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message || "Registro completado");
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error al registrarte.");
+    });
+}
+</script>
 
 </body>
 </html>

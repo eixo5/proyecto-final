@@ -52,7 +52,7 @@
 
                     <button
                         class="btn btn-success w-100 d-flex justify-content-center align-items-center gap-2"
-                        onclick="alert('Esta acción se gestionaría vía API: POST /api/workshops/{{ workshop.id }}/register');">
+                        onclick="registerToWorkshop('{{ workshop.id }}')">
                         <i class="bi bi-pencil-square"></i>
                         <span>Inscribirme en este taller</span>
                     </button>
