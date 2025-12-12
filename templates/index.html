@@ -7,7 +7,7 @@
 {% block content %}
 <h2 class="mb-5 text-center fw-bold text-white">Inscribete a Nuestros Talleres de Formación</h2> 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center align-items-start g-4">
     {# Bucle de Jinja para iterar sobre la lista de talleres ('workshops') #}
     {% for workshop in workshops %}
     <div class="col-md-6 col-lg-4 mb-4">
@@ -17,14 +17,12 @@
                 
                 {# SECCIÓN 1: ÍCONO DE CATEGORÍA #}
                 <div class="text-center mb-3">
-                    {# Lógica condicional para asignar un ícono visual (Bootstrap Icons) según la categoría #}
                     {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
                         <i class="bi bi-code-slash display-5 text-primary"></i>
                     {% elif workshop.category == 'Habilidades Blandas' %}
                         <i class="bi bi-person-check-fill display-5 text-success"></i>
                     {% elif workshop.category == 'Negocios' %}
                         <i class="bi bi-briefcase-fill display-5 text-info"></i>
-                    {# Nota: El color de Inglés y Química se define inline o se basa en la paleta por defecto #}
                     {% elif workshop.category == 'Inglés' %}
                         <i class="bi bi-translate display-5" style="color: #6c757d;"></i>
                     {% elif workshop.category == 'Electricidad / Electrónica' %}
@@ -42,33 +40,32 @@
                 <h4 class="card-title text-center mb-1 fw-bold">{{ workshop.name }}</h4>
                 
                 <p class="text-center mb-3">
-                    {# Lógica condicional para asignar el badge de color (similar a admin.html) #}
                     {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
-                        <span class="badge bg-info text-dark">💻 {{ workshop.category }}</span>
+                        <span class="badge bg-info text-dark">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Habilidades Blandas' %}
-                        <span class="badge bg-success">🤝 {{ workshop.category }}</span>
+                        <span class="badge bg-success">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Negocios' %}
-                        <span class="badge bg-warning text-dark">📈 {{ workshop.category }}</span>
+                        <span class="badge bg-warning text-dark">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Inglés' %}
-                        <span class="badge bg-secondary">🌐 {{ workshop.category }}</span>
+                        <span class="badge bg-secondary">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Electricidad / Electrónica' %}
-                        <span class="badge bg-danger">⚡ {{ workshop.category }}</span>
+                        <span class="badge bg-danger">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Hotelería / Turismo' %}
-                        <span class="badge bg-primary">✈️ {{ workshop.category }}</span>
+                        <span class="badge bg-primary">{{ workshop.category }}</span>
                     {% elif workshop.category == 'Química' %}
-                        <span class="badge bg-dark">🧪 {{ workshop.category }}</span>
+                        <span class="badge bg-dark">{{ workshop.category }}</span>
                     {% else %}
-                        <span class="badge bg-light text-dark">❓ Sin Categoría</span>
+                        <span class="badge bg-light text-dark">Sin Categoría</span>
                     {% endif %}
                 </p>
                 
-                {# DESCRIPCIÓN #}
-                {# flex-grow-1 asegura que este párrafo ocupe el espacio disponible antes de los detalles #}
-                <p class="card-text text-muted mb-4 flex-grow-1">{{ workshop.description }}</p>
+                {# DESCRIPCIÓN (CORRECCIÓN: Se agrega min-height) #}
+                <p class="card-text text-muted mb-4 flex-grow-1" style="min-height: 40px;">
+                    {{ workshop.description }}
+                </p>
                 
                 {# SECCIÓN 2: DETALLES (FECHA, HORA, LUGAR) #}
                 <div class="mt-auto">
-                    {# 'workshop-detail' es una clase personalizada para el formato del detalle #}
                     <div class="workshop-detail">
                         <i class="bi bi-calendar-event"></i> 
                         <span class="fw-bolder me-1">Fecha:</span> <span>{{ workshop.date }}</span>
@@ -76,19 +73,20 @@
                     <div class="workshop-detail">
                         <i class="bi bi-clock"></i> 
                         <span class="fw-bolder me-1">Hora:</span> 
-                        {# Lógica Jinja/Flask para mostrar AM/PM, si se desea #}
                         {% set hour = workshop.time.split(':')[0] | int %}
                         {% set suffix = 'AM' if hour < 12 else 'PM' %}
                         <span>{{ workshop.time }} {{ suffix }}</span>
                     </div>
                     <div class="workshop-detail">
                         <i class="bi bi-geo-alt"></i> 
-                        <span class="fw-bolder me-1">Ubicación:</span> <span>{{ workshop.location }}</span>
+                        <span class="fw-bolder me-1">Ubicación:</span> 
+                        <span>{{ workshop.location }}</span>
                     </div>
                 </div>
                 
-                {# BOTÓN DE INSCRIPCIÓN (usa la clase vibrante 'btn-inscripcion' de custom.css) #}
-                <button class="btn btn-inscripcion btn-lg mt-3" onclick="alert('Funcionalidad de inscripción aquí.')">
+                {# BOTÓN DE INSCRIPCIÓN #}
+                <button class="btn btn-inscripcion btn-lg mt-3" 
+                        onclick="registerToWorkshop('{{ workshop.id }}')">
                     <i class="bi bi-check-circle me-2"></i> Inscribirme Ahora
                 </button>
             </div>
