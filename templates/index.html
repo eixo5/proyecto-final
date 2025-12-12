@@ -1,72 +1,99 @@
 {% extends "base.html" %}
+{# 
+    Este template hereda la estructura base y el Navbar.
+    Muestra la lista de talleres disponibles para la inscripción del estudiante.
+#}
 
 {% block content %}
-<div class="mb-4">
-    <div class="section-title">
-        <div class="section-title-icon">
-            <i class="bi bi-bookmark-heart-fill"></i>
-        </div>
-        <span>Talleres disponibles</span>
-    </div>
-    <p class="section-subtitle mb-0">
-        Descubre actividades, clubes de lectura y talleres especiales organizados por la biblioteca.
-    </p>
-</div>
+<h2 class="mb-5 text-center fw-bold text-white">Inscribete a Nuestros Talleres de Formación</h2> 
 
-<div class="row">
-    {% if workshops %}
-        {% for workshop in workshops %}
-        <div class="col-md-6 col-xl-4 mb-4">
-            <div class="card lib-workshop-card h-100 shadow-sm border-0 position-relative">
-                <div class="lib-bookmark"></div>
-                <div class="card-body position-relative">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-book me-2 text-warning"></i>{{ workshop.name }}
-                        </h5>
-                        <span class="lib-badge-category">
-                            {{ workshop.category or "General" }}
-                        </span>
-                    </div>
-
-                    {% if workshop.description %}
-                    <p class="card-text mb-3 text-muted" style="min-height: 3.5em;">
-                        {{ workshop.description }}
-                    </p>
+<div class="row justify-content-center">
+    {# Bucle de Jinja para iterar sobre la lista de talleres ('workshops') #}
+    {% for workshop in workshops %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        {# Tarjeta de Bootstrap: usa la clase 'card' personalizada en custom.css #}
+        <div class="card h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+                
+                {# SECCIÓN 1: ÍCONO DE CATEGORÍA #}
+                <div class="text-center mb-3">
+                    {# Lógica condicional para asignar un ícono visual (Bootstrap Icons) según la categoría #}
+                    {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
+                        <i class="bi bi-code-slash display-5 text-primary"></i>
+                    {% elif workshop.category == 'Habilidades Blandas' %}
+                        <i class="bi bi-person-check-fill display-5 text-success"></i>
+                    {% elif workshop.category == 'Negocios' %}
+                        <i class="bi bi-briefcase-fill display-5 text-info"></i>
+                    {# Nota: El color de Inglés y Química se define inline o se basa en la paleta por defecto #}
+                    {% elif workshop.category == 'Inglés' %}
+                        <i class="bi bi-translate display-5" style="color: #6c757d;"></i>
+                    {% elif workshop.category == 'Electricidad / Electrónica' %}
+                        <i class="bi bi-lightning-charge-fill display-5 text-danger"></i>
+                    {% elif workshop.category == 'Hotelería / Turismo' %}
+                        <i class="bi bi-globe-americas display-5 text-primary"></i>
+                    {% elif workshop.category == 'Química' %}
+                        <i class="bi bi-flask-fill display-5" style="color: #343a40;"></i>
                     {% else %}
-                    <p class="card-text mb-3 text-muted fst-italic">
-                        Próximamente se agregará una descripción detallada.
-                    </p>
+                        <i class="bi bi-book display-5 text-muted"></i>
                     {% endif %}
-
-                    <ul class="list-unstyled small mb-3">
-                        <li class="mb-1">
-                            <i class="bi bi-calendar-event me-2 text-secondary"></i>
-                            <strong>Fecha:</strong> {{ workshop.date }} · {{ workshop.time }}
-                        </li>
-                        <li>
-                            <i class="bi bi-geo-alt-fill me-2 text-secondary"></i>
-                            <strong>Lugar:</strong> {{ workshop.location }}
-                        </li>
-                    </ul>
-
-                    <button
-                        class="btn btn-success w-100 d-flex justify-content-center align-items-center gap-2"
-                        onclick="registerToWorkshop('{{ workshop.id }}')">
-                        <i class="bi bi-pencil-square"></i>
-                        <span>Inscribirme en este taller</span>
-                    </button>
                 </div>
+
+                {# TÍTULO Y BADGE DE CATEGORÍA #}
+                <h4 class="card-title text-center mb-1 fw-bold">{{ workshop.name }}</h4>
+                
+                <p class="text-center mb-3">
+                    {# Lógica condicional para asignar el badge de color (similar a admin.html) #}
+                    {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
+                        <span class="badge bg-info text-dark">💻 {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Habilidades Blandas' %}
+                        <span class="badge bg-success">🤝 {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Negocios' %}
+                        <span class="badge bg-warning text-dark">📈 {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Inglés' %}
+                        <span class="badge bg-secondary">🌐 {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Electricidad / Electrónica' %}
+                        <span class="badge bg-danger">⚡ {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Hotelería / Turismo' %}
+                        <span class="badge bg-primary">✈️ {{ workshop.category }}</span>
+                    {% elif workshop.category == 'Química' %}
+                        <span class="badge bg-dark">🧪 {{ workshop.category }}</span>
+                    {% else %}
+                        <span class="badge bg-light text-dark">❓ Sin Categoría</span>
+                    {% endif %}
+                </p>
+                
+                {# DESCRIPCIÓN #}
+                {# flex-grow-1 asegura que este párrafo ocupe el espacio disponible antes de los detalles #}
+                <p class="card-text text-muted mb-4 flex-grow-1">{{ workshop.description }}</p>
+                
+                {# SECCIÓN 2: DETALLES (FECHA, HORA, LUGAR) #}
+                <div class="mt-auto">
+                    {# 'workshop-detail' es una clase personalizada para el formato del detalle #}
+                    <div class="workshop-detail">
+                        <i class="bi bi-calendar-event"></i> 
+                        <span class="fw-bolder me-1">Fecha:</span> <span>{{ workshop.date }}</span>
+                    </div>
+                    <div class="workshop-detail">
+                        <i class="bi bi-clock"></i> 
+                        <span class="fw-bolder me-1">Hora:</span> 
+                        {# Lógica Jinja/Flask para mostrar AM/PM, si se desea #}
+                        {% set hour = workshop.time.split(':')[0] | int %}
+                        {% set suffix = 'AM' if hour < 12 else 'PM' %}
+                        <span>{{ workshop.time }} {{ suffix }}</span>
+                    </div>
+                    <div class="workshop-detail">
+                        <i class="bi bi-geo-alt"></i> 
+                        <span class="fw-bolder me-1">Ubicación:</span> <span>{{ workshop.location }}</span>
+                    </div>
+                </div>
+                
+                {# BOTÓN DE INSCRIPCIÓN (usa la clase vibrante 'btn-inscripcion' de custom.css) #}
+                <button class="btn btn-inscripcion btn-lg mt-3" onclick="alert('Funcionalidad de inscripción aquí.')">
+                    <i class="bi bi-check-circle me-2"></i> Inscribirme Ahora
+                </button>
             </div>
         </div>
-        {% endfor %}
-    {% else %}
-        <div class="col-12">
-            <div class="alert alert-warning d-flex align-items-center gap-2 mb-0">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-                <span>No hay talleres disponibles por el momento. Vuelve a consultar pronto.</span>
-            </div>
-        </div>
-    {% endif %}
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}
