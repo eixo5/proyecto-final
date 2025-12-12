@@ -7,10 +7,10 @@
             <div class="section-title-icon">
                 <i class="bi bi-journal-text"></i>
             </div>
-            <span>Panel de Administración</span>
+            <span>Panel de Profesores</span>
         </div>
         <p class="section-subtitle mb-0">
-            Gestiona los talleres de la biblioteca: crea, organiza y mantén actualizada la agenda cultural.
+            Gestiona los talleres: crea, organiza y mantén actualizada la agenda.
         </p>
     </div>
 
@@ -42,9 +42,9 @@
                     </td>
                     <td>{{ workshop.location }}</td>
                     <td class="text-end d-flex justify-content-end gap-2">
-                        <button 
-                            class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1" 
-                            data-bs-toggle="modal" 
+                        <button
+                            class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1"
+                            data-bs-toggle="modal"
                             data-bs-target="#editModal{{ workshop.id }}">
                             <i class="bi bi-pencil-fill"></i>
                             <span>Editar</span>
@@ -61,7 +61,7 @@
                 <tr>
                     <td colspan="4" class="text-center py-4 text-muted">
                         <i class="bi bi-info-circle me-2"></i>
-                        No hay talleres registrados aún. ¡Crea el primero!
+                        No hay talleres registrados aún.
                     </td>
                 </tr>
             {% endif %}
@@ -69,8 +69,6 @@
     </table>
 </div>
 
-
-<!-- Modal Crear Taller -->
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -85,12 +83,12 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Nombre del Taller</label>
-                        <input type="text" name="name" class="form-control" placeholder="Ej.: Club de Lectura de Ciencia Ficción" required>
+                        <input type="text" name="name" class="form-control" placeholder="Ej.: Club de Lectura" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Descripción</label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="Breve descripción del contenido del taller..."></textarea>
+                        <textarea name="description" class="form-control" rows="3" placeholder="Breve descripción..."></textarea>
                     </div>
 
                     <div class="row">
@@ -106,7 +104,7 @@
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Lugar</label>
-                        <input type="text" name="location" class="form-control" placeholder="Sala de lectura, Auditorio, etc." required>
+                        <input type="text" name="location" class="form-control" required>
                     </div>
 
                     <div class="mb-2">
@@ -120,12 +118,8 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-lib-primary">
-                        Guardar Taller
-                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-lib-primary">Guardar Taller</button>
                 </div>
             </form>
         </div>
@@ -133,7 +127,6 @@
 </div>
 
 {% for workshop in workshops %}
-<!-- Modal Editar Taller -->
 <div class="modal fade" id="editModal{{ workshop.id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -146,86 +139,47 @@
                 </div>
 
                 <div class="modal-body">
-
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Nombre del Taller</label>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            class="form-control" 
-                            value="{{ workshop.name }}" 
-                            required>
+                        <input type="text" name="name" class="form-control" value="{{ workshop.name }}" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Descripción</label>
-                        <textarea 
-                            name="description" 
-                            class="form-control" 
-                            rows="3">{{ workshop.description }}</textarea>
+                        <textarea name="description" class="form-control" rows="3">{{ workshop.description }}</textarea>
                     </div>
 
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label fw-semibold">Fecha</label>
-                            <input 
-                                type="date" 
-                                name="date" 
-                                class="form-control" 
-                                value="{{ workshop.date }}" 
-                                required>
+                            <input type="date" name="date" class="form-control" value="{{ workshop.date }}" required>
                         </div>
 
                         <div class="mb-3 col-md-6">
                             <label class="form-label fw-semibold">Hora</label>
-                            <input 
-                                type="time" 
-                                name="time" 
-                                class="form-control" 
-                                value="{{ workshop.time }}" 
-                                required>
+                            <input type="time" name="time" class="form-control" value="{{ workshop.time }}" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Lugar</label>
-                        <input 
-                            type="text" 
-                            name="location" 
-                            class="form-control" 
-                            value="{{ workshop.location }}" 
-                            required>
+                        <input type="text" name="location" class="form-control" value="{{ workshop.location }}" required>
                     </div>
 
                     <div class="mb-2">
                         <label class="form-label fw-semibold">Categoría</label>
                         <select name="category" class="form-select">
-                            <option value="Tecnología" 
-                                {% if workshop.category == 'Tecnología' %}selected{% endif %}>
-                                Tecnología
-                            </option>
-                            <option value="Finanzas" 
-                                {% if workshop.category == 'Finanzas' %}selected{% endif %}>
-                                Finanzas
-                            </option>
-                            <option value="Artes" 
-                                {% if workshop.category == 'Artes' %}selected{% endif %}>
-                                Artes
-                            </option>
+                            <option value="Tecnología" {% if workshop.category == 'Tecnología' %}selected{% endif %}>Tecnología</option>
+                            <option value="Finanzas" {% if workshop.category == 'Finanzas' %}selected{% endif %}>Finanzas</option>
+                            <option value="Artes" {% if workshop.category == 'Artes' %}selected{% endif %}>Artes</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div class="modal-footer d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-lib-primary">
-                        Guardar Cambios
-                    </button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-lib-primary">Guardar Cambios</button>
                 </div>
-
             </form>
         </div>
     </div>
