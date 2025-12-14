@@ -1,169 +1,171 @@
 :root {
-    --brand-color: #1f496d; 
-    --navbar-light-color: #0a4785; 
-    --accent-color: #00bcd4; 
-    --brand-color-dark: #00a2b8; 
-    --overlay-color: rgba(17, 42, 64, 0.85); 
-    --mint-color: #8DEDAB; 
-    --mint-color-dark: #6FC688; 
-    --text-muted-dark: #c0c0c0; 
+    --brand-color: #1f496d;
+    --accent-color: #00bcd4;
+    --glass-bg: rgba(13, 17, 23, 0.85);
+    --glass-bg-dark: rgba(0, 0, 0, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --text-main: #ffffff;
+    --mint-color: #8DEDAB;
+
+    --neon-blue: #00f3ff;
+    --neon-purple: #bc13fe;
+    --neon-green: #39ff14;
+    --neon-red: #ff073a;
+    --neon-yellow: #fff01f;
 }
-
-
-/* ÍCONOS */
-.icon-tecnologia   { color: #2D6CDF; }
-.icon-programacion { color: #6F42C1; }
-.icon-habilidades  { color: #20C997; }
-.icon-negocios     { color: #F59E0B; }
-.icon-ingles       { color: #6C757D; }
-.icon-electricidad { color: #FFCC00; }
-.icon-hoteleria    { color: #0EA5E9; }
-.icon-quimica      { color: #16A34A; }
-.icon-finanzas     { color: #0F766E; }
-.icon-artes        { color: #EC4899; }
-
-/* BADGES */
-.badge-tecnologia   { background: #2D6CDF; color:#fff; }
-.badge-programacion { background: #6F42C1; color:#fff; }
-.badge-habilidades  { background: #20C997; color:#06281f; }
-.badge-negocios     { background: #F59E0B; color:#2b1d00; }
-.badge-ingles       { background: #6C757D; color:#fff; }
-.badge-electricidad { background: #FFCC00; color:#2b2200; }
-.badge-hoteleria    { background: #0EA5E9; color:#05202b; }
-.badge-quimica      { background: #16A34A; color:#fff; }
-.badge-finanzas     { background: #0F766E; color:#fff; }
-.badge-artes        { background: #EC4899; color:#fff; }
-
-.badge{
-  padding: .45em .75em;
-  border-radius: 999px;
-  font-weight: 600;
-}
-
 
 body {
-    font-family: 'Poppins', sans-serif; 
-    color: white; 
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-main);
+
     background-image: url('rm373batch13-085.jpg');
-    background-size: cover; 
-    background-attachment: fixed; 
-    background-position: center center;
-    background-color: var(--overlay-color); 
-    background-blend-mode: multiply; 
+
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #0b111a; /* Este es el color gris que vemos si la imagen falla */
+    min-height: 100vh;
 }
 
-.btn-primary {
-    background-color: var(--brand-color) !important;
-    border-color: var(--brand-color) !important;
-    color: white !important; 
-}
-.btn-primary:hover {
-    background-color: var(--brand-color-dark) !important;
-    border-color: var(--brand-color-dark) !important;
+.main-content {
+    padding-top: 130px !important;
+    padding-bottom: 50px;
 }
 
-.bg-primary {
-    background-color: var(--navbar-light-color) !important;
-    border-color: var(--navbar-light-color) !important;
-    color: white !important; 
+.glass-panel, .card, .modal-content {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    border-radius: 16px;
+    color: white;
 }
 
-.btn-inscripcion {
-    background-color: var(--accent-color) !important;
-    border-color: var(--accent-color) !important;
-    color: var(--brand-color) !important; 
-    font-weight: 700 !important;
-    box-shadow: 0 0.2rem 0.5rem rgba(0, 188, 212, 0.4) !important;
-    transition: background-color 0.2s ease;
+.form-control, .form-select {
+    background-color: var(--input-bg) !important;
+    border: 1px solid var(--glass-border);
+    color: #fff !important;
+    border-radius: 8px;
+    padding: 12px;
 }
-.btn-inscripcion:hover {
-    background-color: var(--brand-color-dark) !important;
-    border-color: var(--brand-color-dark) !important;
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(0, 188, 212, 0.3);
+    outline: none;
     color: white !important;
 }
 
-.text-primary {
-    color: var(--accent-color) !important; 
+.navbar-title {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    font-size: 1.2rem;
 }
 
-.navbar-brand { color: white !important; }
-.navbar-nav .nav-link { color: rgba(255, 255, 255, 0.8) !important; } 
-.navbar-nav .nav-link:hover { color: var(--accent-color) !important; } 
+.navbar-nav .btn {
+    border: 1px solid transparent;
+    color: var(--text-main);
+    background: var(--glass-bg-dark);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    margin: 0 5px;
+}
+
+.btn-neon-blue:hover { border-color: var(--neon-blue); box-shadow: 0 0 15px var(--neon-blue); color: var(--neon-blue); }
+.btn-neon-purple:hover { border-color: var(--neon-purple); box-shadow: 0 0 15px var(--neon-purple); color: var(--neon-purple); }
+.btn-neon-green:hover { border-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green); color: var(--neon-green); }
+.btn-neon-red:hover { border-color: var(--neon-red); box-shadow: 0 0 15px var(--neon-red); color: var(--neon-red); }
+
+.btn-icon-neon {
+    background: var(--glass-bg-dark);
+    border: 1px solid var(--glass-border);
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+.btn-icon-neon.edit:hover { border-color: var(--neon-yellow); color: var(--neon-yellow); box-shadow: 0 0 15px var(--neon-yellow); }
+.btn-icon-neon.delete:hover { border-color: var(--neon-red); color: var(--neon-red); box-shadow: 0 0 15px var(--neon-red); }
+
+.btn-mint {
+    background: var(--mint-color) !important;
+    color: #000 !important;
+    font-weight: 700;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-mint:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(141, 237, 171, 0.4);
+}
+
+.btn-close { filter: invert(1); }
 
 .card {
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border-radius: 2rem; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    color: #343a40; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-3px); 
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4) !important; 
+    transform: translateY(-10px);
+    border-color: var(--neon-blue);
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
 }
 
-.workshop-detail {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    color: #495057; 
+/* --- Efecto de brillo al desplazar los iconos --- */
+
+/* Technology: Blue */
+.card:hover .icon-tecnologia {
+    text-shadow: 0 0 25px var(--neon-blue);
+    transform: scale(1.1);
 }
 
-.workshop-detail i {
-    color: var(--accent-color); 
-    margin-right: 0.75rem;
-    font-size: 1.2rem; 
+.card:hover .icon-programacion {
+    text-shadow: 0 0 25px var(--neon-purple);
+    transform: scale(1.1);
 }
 
-.table th, .table td {
-    vertical-align: middle;
-} 
-
-.btn-mint {
-    background-color: var(--mint-color) !important;
-    border-color: var(--mint-color) !important;
-    color: var(--brand-color) !important; 
-    font-weight: 700;
-    box-shadow: 0 0.2rem 0.5rem rgba(141, 237, 171, 0.4) !important;
+.card:hover .icon-habilidades {
+    text-shadow: 0 0 25px var(--neon-green);
+    transform: scale(1.1);
 }
 
-.btn-mint:hover {
-    background-color: var(--mint-color-dark) !important;
-    border-color: var(--mint-color-dark) !important;
-    color: var(--brand-color) !important;
-}
-.text-accent {
-    color: var(--accent-color) !important;
+.card:hover .icon-negocios {
+    text-shadow: 0 0 25px var(--neon-yellow);
+    transform: scale(1.1);
 }
 
-
-
-.modal-content {
-    background-color: #ffffff !important;
-    color: #343a40 !important;
+.card:hover .icon-ingles {
+    text-shadow: 0 0 25px var(--neon-purple);
+    transform: scale(1.1);
 }
 
-.modal-content label {
-    color: #343a40 !important;
-    font-weight: 600;
+.card:hover .bi-lightning-charge-fill {
+    text-shadow: 0 0 25px #ffc107;
+    transform: scale(1.1);
 }
 
-.modal-content input,
-.modal-content textarea,
-.modal-content select {
-    color: #343a40 !important;
-    background-color: #ffffff !important;
+.card:hover .bi-airplane-fill {
+    text-shadow: 0 0 25px #0dcaf0;
+    transform: scale(1.1);
 }
 
-.modal-content input::placeholder,
-.modal-content textarea::placeholder {
-    color: #6c757d !important;
+.card:hover .bi-flask,
+.card:hover .bi-graph-up-arrow {
+    text-shadow: 0 0 25px #198754;
+    transform: scale(1.1);
 }
 
-.modal-content .form-control {
-    border: 1px solid #ced4da !important;
+.card:hover .bi-palette-fill {
+    text-shadow: 0 0 25px #dc3545;
+    transform: scale(1.1);
 }
 
-.modal-content i {
-    color: var(--brand-color) !important;
+.card:hover .bi-lightbulb {
+    text-shadow: 0 0 25px white;
+    transform: scale(1.1);
 }
