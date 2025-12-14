@@ -17,47 +17,60 @@
                 
                 {# SECCIÓN 1: ÍCONO DE CATEGORÍA #}
                 <div class="text-center mb-3">
-                    {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
-                        <i class="bi bi-code-slash display-5 text-primary"></i>
-                    {% elif workshop.category == 'Habilidades Blandas' %}
-                        <i class="bi bi-person-check-fill display-5 text-success"></i>
-                    {% elif workshop.category == 'Negocios' %}
-                        <i class="bi bi-briefcase-fill display-5 text-info"></i>
-                    {% elif workshop.category == 'Inglés' %}
-                        <i class="bi bi-translate display-5" style="color: #6c757d;"></i>
-                    {% elif workshop.category == 'Electricidad / Electrónica' %}
-                        <i class="bi bi-lightning-charge-fill display-5 text-danger"></i>
-                    {% elif workshop.category == 'Hotelería / Turismo' %}
-                        <i class="bi bi-globe-americas display-5 text-primary"></i>
-                    {% elif workshop.category == 'Química' %}
-                        <i class="bi bi-flask-fill display-5" style="color: #343a40;"></i>
-                    {% else %}
-                        <i class="bi bi-book display-5 text-muted"></i>
+                    {% set cat = workshop.category|default('')|trim %}
+                    
+                    {% if cat == 'Tecnología' %}
+                <i class="bi bi-terminal display-5 icon-tecnologia"></i>
+                    {% elif cat in ['Programación','Programacion'] %}
+                <i class="bi bi-cpu display-5 icon-programacion"></i>
+                    {% elif cat == 'Habilidades Blandas' %}
+                <i class="bi bi-person-check-fill display-5 icon-habilidades"></i>
+                    {% elif cat == 'Negocios' %}
+                <i class="bi bi-cash-coin display-5 icon-negocios"></i>
+                    {% elif cat == 'Inglés' %}
+                <i class="bi bi-translate display-5 icon-ingles"></i>
+                    {% elif cat == 'Electricidad / Electrónica' %}
+                <i class="bi bi-lightning-charge-fill display-5 icon-electricidad"></i>
+                    {% elif cat == 'Hotelería / Turismo' %}
+                <i class="bi bi-globe-americas display-5 icon-hoteleria"></i>
+                    {% elif cat in ['Química','Quimica'] %}
+                <i class="bi bi-flask display-5 icon-quimica"></i>
+                    {% elif cat == 'Finanzas' %}
+                <i class="bi bi-bank display-5 icon-finanzas"></i>
+                    {% elif cat == 'Artes' %}
+                <i class="bi bi-palette-fill display-5 icon-artes"></i>
                     {% endif %}
-                </div>
+        </div>
 
                 {# TÍTULO Y BADGE DE CATEGORÍA #}
                 <h4 class="card-title text-center mb-1 fw-bold">{{ workshop.name }}</h4>
                 
                 <p class="text-center mb-3">
-                    {% if workshop.category == 'Tecnología' or workshop.category == 'Programación' %}
-                        <span class="badge bg-info text-dark">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Habilidades Blandas' %}
-                        <span class="badge bg-success">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Negocios' %}
-                        <span class="badge bg-warning text-dark">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Inglés' %}
-                        <span class="badge bg-secondary">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Electricidad / Electrónica' %}
-                        <span class="badge bg-danger">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Hotelería / Turismo' %}
-                        <span class="badge bg-primary">{{ workshop.category }}</span>
-                    {% elif workshop.category == 'Química' %}
-                        <span class="badge bg-dark">{{ workshop.category }}</span>
-                    {% else %}
-                        <span class="badge bg-light text-dark">Sin Categoría</span>
+                    {% set cat = workshop.category|default('')|trim %}
+                
+                    {% if cat == 'Tecnología' %}
+                <span class="badge badge-tecnologia">{{ cat }}</span>
+                    {% elif cat in ['Programación','Programacion'] %}
+                <span class="badge badge-programacion">{{ cat }}</span>
+                    {% elif cat == 'Habilidades Blandas' %}
+                <span class="badge badge-habilidades">{{ cat }}</span>
+                    {% elif cat == 'Negocios' %}
+                <span class="badge badge-negocios">{{ cat }}</span>
+                    {% elif cat == 'Inglés' %}
+                <span class="badge badge-ingles">{{ cat }}</span>
+                    {% elif cat == 'Electricidad / Electrónica' %}
+                <span class="badge badge-electricidad">{{ cat }}</span>
+                    {% elif cat == 'Hotelería / Turismo' %}
+                <span class="badge badge-hoteleria">{{ cat }}</span>
+                    {% elif cat in ['Química','Quimica'] %}
+                <span class="badge badge-quimica">{{ cat }}</span>
+                    {% elif cat == 'Finanzas' %}
+                <span class="badge badge-finanzas">{{ cat }}</span>
+                    {% elif cat == 'Artes' %}
+                <span class="badge badge-artes">{{ cat }}</span>
                     {% endif %}
-                </p>
+        </p>
+
                 
                 {# DESCRIPCIÓN (CORRECCIÓN: Se agrega min-height) #}
                 <p class="card-text text-muted mb-4 flex-grow-1" style="min-height: 40px;">
