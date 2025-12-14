@@ -9,6 +9,38 @@
     --text-muted-dark: #c0c0c0; 
 }
 
+
+/* ÍCONOS */
+.icon-tecnologia   { color: #2D6CDF; }
+.icon-programacion { color: #6F42C1; }
+.icon-habilidades  { color: #20C997; }
+.icon-negocios     { color: #F59E0B; }
+.icon-ingles       { color: #6C757D; }
+.icon-electricidad { color: #FFCC00; }
+.icon-hoteleria    { color: #0EA5E9; }
+.icon-quimica      { color: #16A34A; }
+.icon-finanzas     { color: #0F766E; }
+.icon-artes        { color: #EC4899; }
+
+/* BADGES */
+.badge-tecnologia   { background: #2D6CDF; color:#fff; }
+.badge-programacion { background: #6F42C1; color:#fff; }
+.badge-habilidades  { background: #20C997; color:#06281f; }
+.badge-negocios     { background: #F59E0B; color:#2b1d00; }
+.badge-ingles       { background: #6C757D; color:#fff; }
+.badge-electricidad { background: #FFCC00; color:#2b2200; }
+.badge-hoteleria    { background: #0EA5E9; color:#05202b; }
+.badge-quimica      { background: #16A34A; color:#fff; }
+.badge-finanzas     { background: #0F766E; color:#fff; }
+.badge-artes        { background: #EC4899; color:#fff; }
+
+.badge{
+  padding: .45em .75em;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+
 body {
     font-family: 'Poppins', sans-serif; 
     color: white; 
@@ -60,7 +92,7 @@ body {
 
 .card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    border-radius: 1rem; 
+    border-radius: 2rem; 
     border: 1px solid rgba(255, 255, 255, 0.15); 
     color: #343a40; 
 }
