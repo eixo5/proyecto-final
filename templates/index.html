@@ -1,108 +1,91 @@
 {% extends "base.html" %}
-{# 
-    Este template hereda la estructura base y el Navbar.
-    Muestra la lista de talleres disponibles para la inscripción del estudiante.
-#}
 
 {% block content %}
-<h2 class="mb-5 text-center fw-bold text-white">Inscribete a Nuestros Talleres de Formación</h2> 
+<div class="text-center mb-5">
+    <h1 class="fw-bold text-white display-5" style="font-family: 'Orbitron', sans-serif; letter-spacing: 2px; text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);">
+        Talleres Disponibles
+    </h1>
+    <p class="text-secondary">Inscríbete y mejora tus habilidades profesionales</p>
+</div>
 
-<div class="row justify-content-center align-items-start g-4">
-    {# Bucle de Jinja para iterar sobre la lista de talleres ('workshops') #}
+<div class="row justify-content-center g-4">
     {% for workshop in workshops %}
-    <div class="col-md-6 col-lg-4 mb-4">
-        {# Tarjeta de Bootstrap: usa la clase 'card' personalizada en custom.css #}
-        <div class="card h-100 shadow-sm">
-            <div class="card-body d-flex flex-column">
-                
-                {# SECCIÓN 1: ÍCONO DE CATEGORÍA #}
-                <div class="text-center mb-3">
-                    {% set cat = workshop.category|default('')|trim %}
-                    
-                    {% if cat == 'Tecnología' %}
-                <i class="bi bi-terminal display-5 icon-tecnologia"></i>
-                    {% elif cat in ['Programación','Programacion'] %}
-                <i class="bi bi-cpu display-5 icon-programacion"></i>
-                    {% elif cat == 'Habilidades Blandas' %}
-                <i class="bi bi-person-check-fill display-5 icon-habilidades"></i>
-                    {% elif cat == 'Negocios' %}
-                <i class="bi bi-cash-coin display-5 icon-negocios"></i>
-                    {% elif cat == 'Inglés' %}
-                <i class="bi bi-translate display-5 icon-ingles"></i>
-                    {% elif cat == 'Electricidad / Electrónica' %}
-                <i class="bi bi-lightning-charge-fill display-5 icon-electricidad"></i>
-                    {% elif cat == 'Hotelería / Turismo' %}
-                <i class="bi bi-globe-americas display-5 icon-hoteleria"></i>
-                    {% elif cat in ['Química','Quimica'] %}
-                <i class="bi bi-flask display-5 icon-quimica"></i>
-                    {% elif cat == 'Finanzas' %}
-                <i class="bi bi-bank display-5 icon-finanzas"></i>
-                    {% elif cat == 'Artes' %}
-                <i class="bi bi-palette-fill display-5 icon-artes"></i>
-                    {% endif %}
-        </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 p-3 position-relative overflow-hidden group-hover">
+            <div class="position-absolute top-0 start-0 w-100 h-100 bg-gradient-primary opacity-0 transition-opacity hover-glow"></div>
 
-                {# TÍTULO Y BADGE DE CATEGORÍA #}
-                <h4 class="card-title text-center mb-1 fw-bold">{{ workshop.name }}</h4>
+            <div class="card-body d-flex flex-column text-center position-relative z-1">
                 
-                <p class="text-center mb-3">
+                <div class="mb-4 mt-2">
                     {% set cat = workshop.category|default('')|trim %}
-                
-                    {% if cat == 'Tecnología' %}
-                <span class="badge badge-tecnologia">{{ cat }}</span>
-                    {% elif cat in ['Programación','Programacion'] %}
-                <span class="badge badge-programacion">{{ cat }}</span>
-                    {% elif cat == 'Habilidades Blandas' %}
-                <span class="badge badge-habilidades">{{ cat }}</span>
-                    {% elif cat == 'Negocios' %}
-                <span class="badge badge-negocios">{{ cat }}</span>
-                    {% elif cat == 'Inglés' %}
-                <span class="badge badge-ingles">{{ cat }}</span>
-                    {% elif cat == 'Electricidad / Electrónica' %}
-                <span class="badge badge-electricidad">{{ cat }}</span>
-                    {% elif cat == 'Hotelería / Turismo' %}
-                <span class="badge badge-hoteleria">{{ cat }}</span>
-                    {% elif cat in ['Química','Quimica'] %}
-                <span class="badge badge-quimica">{{ cat }}</span>
-                    {% elif cat == 'Finanzas' %}
-                <span class="badge badge-finanzas">{{ cat }}</span>
-                    {% elif cat == 'Artes' %}
-                <span class="badge badge-artes">{{ cat }}</span>
+                    {% if cat == 'Tecnología' %} 
+                        <i class="bi bi-terminal display-3 icon-tecnologia neon-glow"></i>
+                    {% elif cat in ['Programación','Programacion'] %} 
+                        <i class="bi bi-cpu display-3 icon-programacion neon-glow"></i>
+                    {% elif cat == 'Habilidades Blandas' %} 
+                        <i class="bi bi-person-check-fill display-3 icon-habilidades neon-glow"></i>
+                    {% elif cat == 'Negocios' %} 
+                        <i class="bi bi-cash-coin display-3 icon-negocios neon-glow"></i>
+                    {% elif cat == 'Inglés' %} 
+                        <i class="bi bi-translate display-3 icon-ingles neon-glow"></i>
+                    {% elif cat == 'Electricidad / Electrónica' %} 
+                        <i class="bi bi-lightning-charge-fill display-3 text-warning neon-glow"></i>
+                    {% elif cat == 'Hotelería / Turismo' %} 
+                        <i class="bi bi-airplane-fill display-3 text-info neon-glow"></i>
+                    {% elif cat in ['Química','Quimica'] %} 
+                        <i class="bi bi-flask display-3 text-success neon-glow"></i>
+                    {% elif cat == 'Finanzas' %} 
+                        <i class="bi bi-graph-up-arrow display-3 text-success neon-glow"></i>
+                    {% elif cat == 'Artes' %} 
+                        <i class="bi bi-palette-fill display-3 text-danger neon-glow"></i>
+                    {% else %} 
+                        <i class="bi bi-lightbulb display-3 text-white neon-glow"></i>
                     {% endif %}
-        </p>
+                </div>
 
+                <h3 class="card-title fw-bold text-white mb-2">{{ workshop.name }}</h3>
                 
-                {# DESCRIPCIÓN (CORRECCIÓN: Se agrega min-height) #}
-                <p class="card-text text-muted mb-4 flex-grow-1" style="min-height: 40px;">
+                <div class="mb-3">
+                    <span class="badge rounded-pill border border-secondary text-secondary fw-light px-3 py-1">
+                        {{ workshop.category }}
+                    </span>
+                </div>
+
+                <p class="card-text text-secondary flex-grow-1 small px-2">
                     {{ workshop.description }}
                 </p>
                 
-                {# SECCIÓN 2: DETALLES (FECHA, HORA, LUGAR) #}
-                <div class="mt-auto">
-                    <div class="workshop-detail">
-                        <i class="bi bi-calendar-event"></i> 
-                        <span class="fw-bolder me-1">Fecha:</span> <span>{{ workshop.date }}</span>
+                <hr class="border-secondary opacity-25 my-4">
+
+                <div class="text-start ps-3 text-secondary mb-4 small">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-calendar3 text-info me-3"></i> 
+                        <span>{{ workshop.date }}</span>
                     </div>
-                    <div class="workshop-detail">
-                        <i class="bi bi-clock"></i> 
-                        <span class="fw-bolder me-1">Hora:</span> 
-                        {% set hour = workshop.time.split(':')[0] | int %}
-                        {% set suffix = 'AM' if hour < 12 else 'PM' %}
-                        <span>{{ workshop.time }} {{ suffix }}</span>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-clock text-info me-3"></i> 
+                        <span>{{ workshop.time }}</span>
                     </div>
-                    <div class="workshop-detail">
-                        <i class="bi bi-geo-alt"></i> 
-                        <span class="fw-bolder me-1">Ubicación:</span> 
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-geo-alt text-info me-3"></i> 
                         <span>{{ workshop.location }}</span>
                     </div>
                 </div>
                 
-                {# BOTÓN DE INSCRIPCIÓN #}
-                <button class="btn btn-inscripcion btn-lg mt-3" 
+                <button class="btn btn-outline-info w-100 mt-auto py-2 fw-bold text-uppercase" 
+                        style="letter-spacing: 1px;"
                         onclick="registerToWorkshop('{{ workshop.id }}')">
-                    <i class="bi bi-check-circle me-2"></i> Inscribirme Ahora
+                    Inscribirme
                 </button>
             </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <div class="glass-panel p-5 d-inline-block">
+            <i class="bi bi-inbox display-1 text-secondary mb-3"></i>
+            <h3 class="text-white">No hay talleres programados</h3>
+            <p class="text-muted">Vuelve más tarde para ver nuevas ofertas.</p>
         </div>
     </div>
     {% endfor %}
